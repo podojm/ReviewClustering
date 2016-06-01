@@ -1,6 +1,9 @@
 import konlpy
 import nltk
 from konlpy.tag import Twitter
+from util import Ngram
+from nlp import NLP
+
 #stremmer를 형용사,동사에 붙여보자!!
 
 
@@ -124,15 +127,14 @@ for subtree in chunks.subtrees():
 
 print(purchaseReview)
 
-test="디자인"
-n=2
-print(len(test))
-result = []
-for i in range(len(test)-n+1):
-    print("i : ",i ,"i+n", i+n)
-    result.append(test[i:i+n])
 
-print(result)
+
+NLP= NLP.NLPProcessing
+
+for word in purchaseReview:
+    tt = NLP.getNgramList(word)
+    print(word)
+    print(tt)
 
 # Display the chunk tree
 #chunks.draw()

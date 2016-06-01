@@ -1,5 +1,5 @@
-from DAO import DAO
-from NLP import NLP
+from dao import DAO
+from nlp import NLP
 from collections import OrderedDict
 
 class RurchaseReview :
