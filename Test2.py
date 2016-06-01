@@ -1,8 +1,8 @@
 import konlpy
 import nltk
 from konlpy.tag import Twitter
-from util import Ngram
 from nlp import NLP
+from util import FileReader
 
 #stremmer를 형용사,동사에 붙여보자!!
 
@@ -66,21 +66,9 @@ print(words)
 print("\n")
 
 
-file =open("/Users/lunjm/PycharmProjects/ReviewClustering/dic/Noun/ShoppingNoun.txt")
-nounDic = {}
-score = file.readline()
-for x in file:
-    x = x.replace('\n', '')
-    nounDic[x] = score
-
-file.close()
-
-print(nounDic.keys())
-# print(nounDic.count())
-
-
-print(nounDic.get('양말'))
-
+adjDic = FileReader.fileReader.getDicData('Adj')
+adcDic = FileReader.fileReader.getDicData('Adv')
+nounDic = FileReader.fileReader.getDicData('Noun')
 
 
 
@@ -108,33 +96,39 @@ for subtree in chunks.subtrees():
         if len(temp) != 0 :
             beforeLabel = 'NP'
             beforeWord = temp
-        print("명사", ''.join(e[0] for e in list(subtree))),
+        # print("명사", ''.join(e[0] for e in list(subtree))),
     elif subtree.label() == 'AP' :
         word = ''.join(e[0] for e in list(subtree))
         if len(temp) != 0 and (beforeLabel == 'NP') :
-            print('length :', beforeWord.__len__())
-            print('0 : ', beforeWord[0])
-            print('0:2 : ', beforeWord[0:2])
             purchaseReview.append(beforeWord +' '+ word)
         else :
             purchaseReview.append(word)
         beforeLabel = 'AP'
         before = word
-        print("형용사", ''.join((e[0] for e in list(subtree))))
+        # print("형용사", ''.join((e[0] for e in list(subtree))))
         # print(subtree.pprint())
-
-#N그램 도입 2-3까지만 하면 된다!
 
 print(purchaseReview)
 
 
 
+
 NLP= NLP.NLPProcessing
 
+tt ={}
 for word in purchaseReview:
-    tt = NLP.getNgramList(word)
-    print(word)
-    print(tt)
+    tt[word] = NLP.getNgramList(word)
 
+
+
+result = {}
+
+for sentence in tt:
+    result[sentence] = 0
+    for gram in tt.get(sentence) :
+        if nounDic.get(gram) != None :
+            result[sentence] += nounDic.get(gram)
+
+print(result)
 # Display the chunk tree
 #chunks.draw()
