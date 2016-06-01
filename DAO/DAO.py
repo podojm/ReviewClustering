@@ -1,8 +1,8 @@
 import pymysql
 
-class review :
+class Review :
 
-    def getReview(self, mainDealSrl) :
+    def getReview(mainDealSrl) :
         connection = pymysql.connect(host='devdb.tmonc.net',
                                      port=3306,
                                      user='TM_DDL2_COMUSER',

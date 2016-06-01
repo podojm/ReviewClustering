@@ -1,6 +1,5 @@
-import Model
-import NLP
-import operator
+from DAO import DAO
+from NLP import NLP
 from collections import OrderedDict
 
 class RurchaseReview :
@@ -18,8 +17,8 @@ class RurchaseReview :
 
 
 
-daoReview = Model.review();
-data = daoReview.getReview(285975213);
+daoReview = DAO.Review;
+data = daoReview.getReview(305051958);
 nlp = NLP.NLPProcessing;
 
 reps = {'(':'', ')':'', ',':'', "'":'', '\r\n\r\n':'', '\r\n':''}
