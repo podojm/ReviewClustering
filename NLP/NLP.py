@@ -15,14 +15,39 @@ class NLPProcessing :
         grammar = """
         NP: {<N.*>*<Suffix>?}   # Noun phrase
         VP: {<V.*>*}            # Verb phrase
-        AP: {<A.*>*}            # Adjective phrase
+        AP: {<A.*>}            # Adjective phrase
         """
         parser = nltk.RegexpParser(grammar)  # grammer 별로 구분
         chunks = parser.parse(words)  # 구문분석ß
 
         return chunks
 
-    #getPurchaseReview
+    # 구문분석
+    def makeParseTree2(words):
+        grammar = """
+        NP: {<N.*>*<Suffix>?}   # Noun phrase
+        ADJ: {<Adj.*>}            # Adjective phrase
+        ADV: {<Adv.*>*}            # Adverb phrase
+        """
+        parser = nltk.RegexpParser(grammar)  # grammer 별로 구분
+        chunks = parser.parse(words)  # 구문분석ß
+
+        return chunks
+
+    # Ngram
+    def getNgramList(data):
+        result = []
+        words = data.split(' ')
+        for word in words:
+            wordLen = len(word)
+            for n in range(wordLen):
+                n += 1
+                for i in range(wordLen - n + 1):
+                    result.append(word[i:i + n])
+
+        return result
+
+    #getPurchaseReview    OldMain 버젼
     def getPurchaseReview(chunks):
 
         purchaseReview = []
@@ -49,6 +74,10 @@ class NLPProcessing :
                 # print("형용사", ''.join((e[0] for e in list(subtree))))
 
         return purchaseReview
+
+
+
+
 
 
 
