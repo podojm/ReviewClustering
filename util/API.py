@@ -1,7 +1,7 @@
 from nlp import NLP
 
 
-#TODO getPurchaseReview1~3 별로 공통 부분 추출 및 리팩토링 필요
+#TODO getPurchaseReview1~2 별로 공통 부분 추출 및 리팩토링 필요
 class API:
 
     def getScoring(word, dic):
@@ -103,3 +103,27 @@ class API:
                 # print("형용사", ''.join((e[0] for e in list(subtree))))
 
         return purchaseReviews
+
+    def getPurchaseReview3(candidateList, adjDic, advDic, nounDic):
+
+        result = {}
+        for candidate in candidateList:
+            review = ''
+            score = 0
+            for part in candidate:
+                for pos, word in part.items():
+                    review += word + " "
+                    if pos == 'Noun' :
+                        score += API.getScoring(word, nounDic)
+                        score += API.getScoring(word, advDic)
+                    elif pos == 'Adjective' :
+                        score += API.getScoring(word, adjDic)
+                    elif pos == 'Adverb' :
+                        score += API.getScoring(word, advDic)
+                    elif pos == 'Verb' :
+                        score += API.getScoring(word, adjDic)
+
+            result[review] = score;
+
+        return result
+

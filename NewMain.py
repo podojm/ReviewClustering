@@ -31,9 +31,9 @@ class PurchaseReview :
         sentence = format(row)
         # print(sentence)
         sentence = bP.pruningSentence(sentence)
-        print(sentence)
+        #print(sentence)
         words = nlp.posTagging(sentence)
-        print(words)
+        #print(words)
         #chunks = nlp.makeParseTree(words) #기존 패턴
         chunks = nlp.makeParseTree2(words)
         # print(chunks)
