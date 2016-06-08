@@ -1,5 +1,5 @@
 from nlp import NLP
-
+from util import BeforeProcessing
 
 #TODO getPurchaseReview1~2 별로 공통 부분 추출 및 리팩토링 필요
 class API:
@@ -14,6 +14,25 @@ class API:
                 score += dic.get(gram)
 
         return score
+
+
+    # return - 명사 사전에 매칭된 단어들의 인덱스
+    def getWordIndex(sentence, dic):
+        bP = BeforeProcessing.BeforeProcessing
+        nlp = NLP.NLPProcessing
+
+        nounIndexList = {}
+        splitedSentence = bP.splitSentenceWithList(sentence)
+        print('잘려진 문장 : ', splitedSentence)
+        for index, word in enumerate(splitedSentence) :
+            ngramList = nlp.getNgramList(word)
+            for gram in ngramList:
+                if dic.get(gram) != None:
+                    nounIndexList[index] = gram
+        return nounIndexList
+
+
+
 
     # getPurchaseReview   NewMain   Scoring
     def getPurchaseReview(chunks, adjDic, advDic, nounDic, negaAdjDic):
@@ -59,7 +78,7 @@ class API:
 
 
     # getPurchaseReview  NewMain 새로운 로직 뽑는거
-    def getPurchaseReview2(chunks, adjDic, advDic, nounDic):
+    def  getPurchaseReview2(chunks, adjDic, advDic, nounDic):
 
         purchaseReviews = {}
         beforeLabel = ""

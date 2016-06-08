@@ -15,10 +15,10 @@ twitter = Twitter()
 #sentence = u'좋은 사과'
 #sentence = u'다맘에들어요 다다다다다!!!!!!길이감도 좋고 핏도 좋고 배송도 빠르고 기분너무좋아요ㅋㅋㅋ감사합니당'
 #sentence = u'이 제품 가격대비완전좋아요^^~화질 좋고~~음향좋고~~^^.배송은 아주 만족스럽습니다~~^^'
-sentence = u'배송이 엄청빠르네요ㅎㅎ후기에서 결점이 있다고하던데..무결점으로 주문해서 그런지 결점이 하나도없네요ㅎㅎ가성비는 전 브랜드를 통합해서 최고인거같네요ㅎㅎ추천합니다.'
+#sentence = u'배송이 엄청빠르네요ㅎㅎ후기에서 결점이 있다고하던데..무결점으로 주문해서 그런지 결점이 하나도없네요ㅎㅎ가성비는 전 브랜드를 통합해서 최고인거같네요ㅎㅎ추천합니다.'
 #sentence = '양말이생각보다퀄리티도좋고~~그림도너무이쁘네요~~~다음에또사야겟어요~~잘신겠습니다~~~~'
 
-
+sentence = '양말 종류도 많고 귀엽습니다'
 
 #sentence = '좋네요 번창하세여'
 # '만족합니다'
@@ -71,8 +71,6 @@ adcDic = FileReader.fileReader.getDicData('Adv')
 nounDic = FileReader.fileReader.getDicData('Noun')
 
 
-
-
 # Define a chunk grammar, or chunking rules, then chunk
 grammar = """
 NP: {<N.*>*<Suffix>?}   # Noun phrase
@@ -108,6 +106,7 @@ for subtree in chunks.subtrees():
         # print("형용사", ''.join((e[0] for e in list(subtree))))
         # print(subtree.pprint())
 
+print("ddd")
 print(purchaseReview)
 
 

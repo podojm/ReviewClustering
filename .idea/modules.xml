@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$USER_HOME$/PycharmProjects/ReviewClustering/.idea/ReviewClustering.iml" filepath="$USER_HOME$/PycharmProjects/ReviewClustering/.idea/ReviewClustering.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ReviewClustering.iml" filepath="$PROJECT_DIR$/.idea/ReviewClustering.iml" />
     </modules>
   </component>
 </project>

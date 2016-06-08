@@ -22,13 +22,13 @@ class PurchaseReview :
     nounDic = FileReader.fileReader.getDicData('Noun')
 
     candidateList = []
-    data = daoReview.getReview(307410130)
+    data = daoReview.getReview(285975213)
     for row in data:
         sentence = format(row)
         sentence = bP.pruningSentence(sentence)
-        # print(sentence)
+        print(sentence)
         words = nlp.posTagging(sentence)
-        # print(words)
+        print(words)
         chunks = []
         for word, pos in words:
             if pos == 'Noun' or pos == 'Adjective' or pos == 'Adverb' or pos =='Verb':
@@ -41,28 +41,33 @@ class PurchaseReview :
             if chunk.get('Adjective') or chunk.get('Verb') :
                 endIndex = index+1
                 candidateList.append(chunks[startIndex:endIndex])
+
+                oneReview = ''
+                for index in range(startIndex, endIndex):
+                    for word in list(chunks[index].values()):
+                        oneReview += word + " "
+                print('결과 : ', oneReview)
+
                 startIndex = endIndex
-                #oneReview = ''
-                # for index in range(startIndex, endIndex) :
-                #     for word in list(chunks[index].values()):
-                #         oneReview += word + " "
+
+
                 # candidateList.append(oneReview)
-                #startIndex = endIndex
+                # startIndex = endIndex
+
+        print()
 
 
-
-
-    reviewResult = {}
-    purchaseReview = api.getPurchaseReview3(candidateList, adjDic, advDic, nounDic)
-
-    for data in purchaseReview:
-        if data in reviewResult.keys():
-            count = reviewResult[data][1] + 1
-            reviewResult[data] = [purchaseReview[data], count]
-        else:
-            reviewResult[data] = [purchaseReview[data], 1]
-
-    sortedData = OrderedDict(sorted(reviewResult.items(), key=lambda x: x[1]))
-
-    for i, j in sortedData.items():
-         print(i, ',', j[0], ',', j[1])
+    # reviewResult = {}
+    # purchaseReview = api.getPurchaseReview3(candidateList, adjDic, advDic, nounDic)
+    #
+    # for data in purchaseReview:
+    #     if data in reviewResult.keys():
+    #         count = reviewResult[data][1] + 1
+    #         reviewResult[data] = [purchaseReview[data], count]
+    #     else:
+    #         reviewResult[data] = [purchaseReview[data], 1]
+    #
+    # sortedData = OrderedDict(sorted(reviewResult.items(), key=lambda x: x[1]))
+    #
+    # for i, j in sortedData.items():
+    #      print(i, ',', j[0], ',', j[1])
